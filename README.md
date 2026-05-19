@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vive Alto Génova – NuestroHogar</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root{
   --black:#0a0a0a; --dark:#111111; --mid:#222222;
@@ -22,388 +22,260 @@ a{text-decoration:none;color:inherit;}
 
 /* ── NAVBAR ── */
 .nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);
-  border-bottom:1px solid rgba(255,255,255,0.1);
-  transition:all 0.4s ease;
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 clamp(16px,5vw,60px);height:68px;
+  background:rgba(10,10,10,.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  transition:all .3s;
 }
-.nav-container{
-  max-width:1400px;margin:0 auto;padding:1.25rem 2rem;
-  display:flex;justify-content:between;align-items:center;
+.nav.scrolled{height:58px;background:rgba(10,10,10,.98);}
+.nav-logo{display:flex;flex-direction:column;line-height:1;}
+.nav-logo .nl{color:var(--white);font-family:var(--font-serif);font-size:18px;font-weight:900;}
+.nav-logo .nl span{color:var(--gold);}
+.nav-logo .ns{color:rgba(255,255,255,.35);font-size:9px;letter-spacing:3px;text-transform:uppercase;margin-top:2px;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{color:rgba(255,255,255,.65);font-size:13px;font-weight:500;letter-spacing:.5px;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-wa{background:var(--blue);color:var(--white)!important;padding:8px 18px;border-radius:20px;font-size:12px!important;font-weight:600!important;letter-spacing:.5px;transition:background .2s!important;}
+.nav-wa:hover{background:#1565a0!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.hamburger span{width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .3s;}
+@media(max-width:760px){
+  .nav-links{display:none;position:fixed;top:68px;left:0;right:0;background:var(--dark);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid #222;}
+  .nav-links.open{display:flex;}
+  .hamburger{display:flex;}
 }
-.nav-logo{
-  font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:var(--white);
-  letter-spacing:0.5px;
-}
-.nav-logo span{color:var(--gold);font-weight:300;font-family:var(--font-sans);font-size:0.9rem;letter-spacing:2px;margin-left:8px;text-transform:uppercase;}
-.nav-menu{display:flex;gap:2.5rem;list-style:none;}
-.nav-link{color:var(--gray);font-size:0.85rem;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;transition:color 0.3s;}
-.nav-link:hover,.nav-link.active{color:var(--white);}
-.nav-btn{
-  background:var(--gold);color:var(--black);padding:0.6rem 1.25rem;
-  font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;
-  border-radius:0;transition:all 0.3s;
-}
-.nav-btn:hover{background:var(--white);transform:translateY(-2px);}
-.nav-toggle{display:none;color:var(--white);font-size:1.5rem;cursor:pointer;}
 
 /* ── HERO ── */
 .hero{
-  height:100vh;position:relative;background:var(--black);
-  display:flex;align-items:center;padding:0 10%;overflow:hidden;
+  height:100vh;min-height:600px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
 }
-.hero-bg{
-  position:absolute;top:0;left:0;width:100%;height:100%;
-  background:linear-gradient(90deg, rgba(10,10,10,0.85) 30%, rgba(10,10,10,0.2) 100%), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-  z-index:1;
-}
-.hero-content{position:relative;z-index:2;max-width:700px;color:var(--white);opacity:0;transform:translateY(30px);animation:fadeInUp 1s 0.3s forwards;}
-.hero-tag{color:var(--gold);font-size:0.9rem;font-weight:600;text-transform:uppercase;letter-spacing:3px;margin-bottom:1rem;display:block;}
-.hero-title{font-family:var(--font-serif);font-size:4rem;line-height:1.1;margin-bottom:1.5rem;font-weight:700;}
-.hero-p{color:rgba(255,255,255,0.7);font-size:1.1rem;font-weight:300;margin-bottom:2.5rem;max-width:550px;}
-
-/* ── BUTTONS ── */
-.btn-group{display:flex;gap:1.5rem;align-items:center;}
-.btn-p{
-  background:var(--gold);color:var(--black);padding:1rem 2rem;
-  font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;
-  transition:all 0.3s;display:inline-block;
-}
-.btn-p:hover{background:var(--white);transform:translateY(-3px);box-shadow:0 10px 20px rgba(0,0,0,0.2);}
-.btn-s{
-  border:1px solid rgba(255,255,255,0.3);color:var(--white);padding:1rem 2rem;
-  font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;
-  transition:all 0.3s;display:inline-block;
-}
-.btn-s:hover{background:rgba(255,255,255,0.1);border-color:var(--white);transform:translateY(-3px);}
+.hero-bg{position:absolute;inset:0;background:var(--black);}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;transition:opacity 1s;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,.85) 40%,rgba(10,10,10,.4));}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 20px;max-width:780px;}
+.hero-badge{display:inline-block;border:1px solid rgba(212,168,67,.5);color:var(--gold);font-size:10px;letter-spacing:4px;text-transform:uppercase;padding:6px 18px;border-radius:2px;margin-bottom:24px;}
+.hero-title{font-family:var(--font-serif);color:var(--white);font-size:clamp(42px,8vw,82px);font-weight:900;line-height:1;margin-bottom:16px;}
+.hero-title span{color:var(--gold);font-style:italic;}
+.hero-sub{color:rgba(255,255,255,.55);font-size:clamp(14px,2vw,17px);font-weight:300;letter-spacing:1px;margin-bottom:40px;line-height:1.7;}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{background:var(--blue);color:var(--white);padding:14px 32px;border-radius:2px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all .25s;border:none;cursor:pointer;}
+.btn-primary:hover{background:#1565a0;transform:translateY(-2px);}
+.btn-outline{border:1px solid rgba(255,255,255,.4);color:var(--white);padding:14px 32px;border-radius:2px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all .25s;}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,.08);}
+.hero-scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.35);font-size:10px;letter-spacing:2px;text-transform:uppercase;}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.4),transparent);animation:scrollline 2s ease-in-out infinite;}
+@keyframes scrollline{0%,100%{opacity:.3;transform:scaleY(.5);}50%{opacity:1;transform:scaleY(1);}}
 
 /* ── SECTIONS GENERAL ── */
-section{padding:8rem 2rem;position:relative;}
-.container{max-width:1300px;margin:0 auto;}
-.sec-header{max-width:600px;margin-bottom:5rem;opacity:0;transform:translateY(30px);transition:all 0.8s ease;}
-.sec-header.show{opacity:1;transform:translateY(0);}
-.sec-tag{color:var(--blue);font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;display:block;margin-bottom:0.75rem;}
-.sec-title{font-family:var(--font-serif);font-size:2.5rem;color:var(--dark);font-weight:700;}
-
-/* ── DESCRIPCIÓN ── */
-.desc-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:5rem;align-items:center;}
-.desc-text p{font-size:1.1rem;color:var(--mid);font-weight:300;margin-bottom:1.5rem;line-height:1.8;}
-.desc-text p strong{font-weight:600;color:var(--black);}
-.desc-img{position:relative;padding-bottom:120%;overflow:hidden;background:var(--light);}
-.desc-img img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:transform 0.8s;}
-.desc-img:hover img{transform:scale(1.05);}
-
-/* ── AMENIDADES ── */
-.amenities{background:var(--light);}
-.amenities-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;background:rgba(0,0,0,0.05);}
-.amenity-card{background:var(--white);padding:4rem 3rem;text-align:left;transition:all 0.4s;}
-.amenity-card:hover{background:var(--dark);color:var(--white);}
-.am-num{font-size:0.85rem;color:var(--gray);display:block;margin-bottom:2rem;font-weight:500;letter-spacing:1px;}
-.amenity-card i{font-size:2.5rem;color:var(--blue);margin-bottom:1.5rem;transition:color 0.4s;}
-.amenity-card:hover i{color:var(--gold);}
-.amenity-card h3{font-family:var(--font-serif);font-size:1.4rem;margin-bottom:1rem;font-weight:700;}
-.amenity-card p{font-size:0.95rem;color:var(--gray);font-weight:300;line-height:1.6;}
-.amenity-card:hover p{color:rgba(255,255,255,0.6);}
+section{padding:clamp(60px,10vw,100px) clamp(16px,6vw,80px);}
+.section-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:12px;}
+.section-title{font-family:var(--font-serif);font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.1;margin-bottom:20px;}
+.section-sub{color:var(--gray);font-size:15px;line-height:1.7;max-width:560px;}
+.divider{width:48px;height:3px;background:var(--gold);margin:20px 0;}
 
 /* ── MODELOS ── */
-.models-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:3rem;}
-.model-card{background:var(--white);border:1px solid rgba(0,0,0,0.05);overflow:hidden;transition:all 0.4s;}
-.model-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,0.05);}
-.model-img{position:relative;padding-bottom:75%;overflow:hidden;background:var(--light);}
-.model-img img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;}
-.model-info{padding:2.5rem;}
-.model-info h3{font-family:var(--font-serif);font-size:1.75rem;margin-bottom:0.5rem;}
-.model-info .price{color:var(--blue);font-weight:600;font-size:1.2rem;margin-bottom:1.5rem;display:block;}
-.model-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding-top:1.5rem;border-top:1px solid rgba(0,0,0,0.05);text-align:center;}
-.spec-item i{font-size:1.2rem;color:var(--gray);margin-bottom:0.5rem;display:block;}
-.spec-item span{font-size:0.85rem;color:var(--mid);font-weight:500;}
+.modelos{background:var(--light);}
+.modelos-header{text-align:center;margin-bottom:50px;}
+.modelos-header .section-sub{margin:0 auto;}
+.modelos-grid{display:grid;gap:24px;}
+@media(min-width:700px){.modelos-grid{grid-template-columns:1fr 1fr;}}
+@media(min-width:1100px){.modelos-grid{grid-template-columns:1fr 1fr 1fr;}}
+.modelo-card{background:var(--white);overflow:hidden;box-shadow:0 4px 30px rgba(0,0,0,.08);transition:transform .3s,box-shadow .3s;}
+.modelo-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.14);}
+.modelo-img{height:220px;overflow:hidden;}
+.modelo-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.modelo-card:hover .modelo-img img{transform:scale(1.06);}
+.modelo-body{padding:28px;}
+.modelo-tag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:8px;}
+.modelo-name{font-family:var(--font-serif);font-size:28px;font-weight:900;margin-bottom:4px;}
+.modelo-m2{font-size:13px;color:var(--gray);margin-bottom:16px;}
+.modelo-features{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.modelo-feat{display:flex;align-items:center;gap:8px;font-size:13px;color:#333;}
+.modelo-feat::before{content:"";width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+.modelo-cta{display:inline-block;background:var(--black);color:var(--white);padding:10px 22px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:background .2s;}
+.modelo-cta:hover{background:var(--blue);}
+.modelo-highlight{border-top:3px solid var(--gold);}
 
-/* ── SIMULADOR ── */
-.calc-sec{background:var(--dark);color:var(--white);}
-.calc-sec .sec-title{color:var(--white);}
-.calc-sec .sec-tag{color:var(--gold);}
-.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
-.calc-form{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);padding:3.5rem;}
-.input-field{margin-bottom:2rem;}
-.input-field label{display:block;font-size:0.8rem;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.5);margin-bottom:0.75rem;font-weight:500;}
-.input-field input, .input-field select{
-  width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
-  padding:1rem;color:var(--white);font-size:1rem;font-family:var(--font-sans);transition:all 0.3s;
-}
-.input-field input:focus, .input-field select:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,0.08);}
-.calc-btn{
-  width:100%;background:var(--gold);color:var(--black);border:none;padding:1.2rem;
-  font-size:0.9rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;transition:all 0.3s;
-}
-.calc-btn:hover{background:var(--white);transform:translateY(-2px);}
-.calc-result{
-  background:var(--white);color:var(--black);padding:4rem;height:100%;
-  display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(30px);transition:all 0.6s ease;
-}
-.calc-result.show{opacity:1;transform:translateX(0);}
-.res-title{font-size:0.85rem;text-transform:uppercase;letter-spacing:2px;color:var(--gray);margin-bottom:2rem;display:block;font-weight:600;}
-.res-amount{font-family:var(--font-serif);font-size:3.5rem;font-weight:700;color:var(--dark);line-height:1;margin-bottom:0.5rem;}
-.res-pago{font-size:2rem;font-weight:600;color:var(--blue);margin-bottom:2.5rem;}
-.res-pago span{font-size:1rem;color:var(--gray);font-weight:400;}
-.res-data{display:flex;justify-content:between;padding:1rem 0;border-top:1px solid rgba(0,0,0,0.05);font-size:0.95rem;}
-.res-data span:last-child{font-weight:600;}
-.res-note{font-size:0.8rem;color:var(--gray);margin-top:2rem;line-height:1.5;font-weight:300;}
+/* ── GALERÍA ── */
+.galeria-header{text-align:center;margin-bottom:40px;}
+.galeria-grid{display:grid;gap:4px;}
+@media(min-width:500px){.galeria-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:800px){.galeria-grid{grid-template-columns:repeat(4,1fr);}}
+.gal-item{aspect-ratio:1;overflow:hidden;cursor:pointer;position:relative;}
+.gal-item.featured{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.gal-item:hover img{transform:scale(1.07);}
+.gal-overlay{position:absolute;inset:0;background:rgba(10,10,10,0);display:flex;align-items:center;justify-content:center;transition:background .3s;}
+.gal-item:hover .gal-overlay{background:rgba(10,10,10,.35);}
+.gal-icon{color:var(--white);font-size:28px;opacity:0;transition:opacity .3s;}
+.gal-item:hover .gal-icon{opacity:1;}
 
-/* ── CONTACTO / FORM ── */
-.contact-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:6rem;}
-.info-box h3{font-family:var(--font-serif);font-size:1.8rem;margin-bottom:1.5rem;}
-.info-box p{color:var(--mid);font-weight:300;margin-bottom:3rem;font-size:1.05rem;line-height:1.7;}
-.info-item{display:flex;gap:1.5rem;margin-bottom:2rem;align-items:start;}
-.info-item i{font-size:1.2rem;color:var(--blue);margin-top:0.25rem;}
-.info-item h4{font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;color:var(--gray);margin-bottom:0.25rem;}
-.info-item p{font-size:1.05rem;color:var(--black);margin-bottom:0;}
-.c-form{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
-.cf-field{display:flex;flex-direction:column;}
-.cf-field.full{grid-column:span 2;}
-.cf-field label{font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--gray);margin-bottom:0.5rem;font-weight:600;}
-.cf-field input, .cf-field select, .cf-field textarea{
-  padding:1rem;background:var(--light);border:1px solid transparent;font-family:var(--font-sans);font-size:0.95rem;transition:all 0.3s;
-}
-.cf-field input:focus, .cf-field select:focus, .cf-field textarea:focus{outline:none;border-color:var(--blue);background:var(--white);box-shadow:0 5px 15px rgba(0,0,0,0.02);}
-.cf-btn{
-  grid-column:span 2;background:var(--dark);color:var(--white);border:none;padding:1.2rem;
-  font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;transition:all 0.3s;
-}
-.cf-btn:hover{background:var(--blue);transform:translateY(-2px);}
+/* ── LIGHTBOX ── */
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;flex-direction:column;}
+.lightbox.open{display:flex;}
+.lb-img{max-width:90vw;max-height:80vh;object-fit:contain;border:1px solid rgba(255,255,255,.1);}
+.lb-label{color:rgba(255,255,255,.55);font-size:12px;letter-spacing:2px;margin-top:14px;text-transform:uppercase;}
+.lb-close{position:absolute;top:20px;right:24px;color:var(--white);font-size:28px;cursor:pointer;opacity:.7;transition:opacity .2s;background:none;border:none;line-height:1;}
+.lb-close:hover{opacity:1;}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 16px;pointer-events:none;}
+.lb-btn{pointer-events:all;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:var(--white);width:44px;height:44px;border-radius:50%;font-size:18px;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;}
+.lb-btn:hover{background:rgba(255,255,255,.25);}
+
+/* ── AMENIDADES ── */
+.amenidades{background:var(--dark);}
+.amenidades .section-label{color:var(--gold);}
+.amenidades .section-title{color:var(--white);}
+.amenidades .section-sub{color:rgba(255,255,255,.45);}
+.amen-grid{display:grid;gap:16px;margin-top:40px;}
+@media(min-width:500px){.amen-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:800px){.amen-grid{grid-template-columns:repeat(4,1fr);}}
+.amen-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:24px 20px;text-align:center;transition:all .3s;}
+.amen-card:hover{background:rgba(255,255,255,.08);border-color:rgba(212,168,67,.3);transform:translateY(-4px);}
+.amen-icon{font-size:32px;margin-bottom:12px;}
+.amen-name{color:var(--white);font-size:13px;font-weight:600;margin-bottom:4px;}
+.amen-desc{color:rgba(255,255,255,.38);font-size:11px;line-height:1.5;}
+
+/* ── VIDEO ── */
+.video-section{background:var(--black);text-align:center;padding:80px 20px;position:relative;overflow:hidden;}
+.video-section::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(26,122,191,.12) 0%,transparent 70%);}
+.video-placeholder{position:relative;max-width:800px;margin:40px auto 0;aspect-ratio:16/9;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+.play-btn{width:72px;height:72px;background:rgba(26,122,191,.7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--white);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(26,122,191,.4);}70%{box-shadow:0 0 0 20px rgba(26,122,191,0);}}
+.video-coming{color:rgba(255,255,255,.35);font-size:12px;letter-spacing:3px;text-transform:uppercase;}
+.video-section .section-label{color:var(--gold);}
+.video-section .section-title{color:var(--white);}
+
+/* ── MAPA ── */
+.mapa-section{padding:0;}
+.mapa-header{padding:clamp(50px,8vw,80px) clamp(16px,6vw,80px) 0;margin-bottom:30px;}
+.mapa-frame{width:100%;height:420px;border:none;filter:grayscale(30%);}
+.mapa-info{padding:clamp(30px,5vw,50px) clamp(16px,6vw,80px);background:var(--light);display:flex;flex-wrap:wrap;gap:30px;}
+.mapa-info-item{display:flex;align-items:flex-start;gap:12px;}
+.mi-icon{font-size:20px;margin-top:2px;}
+.mi-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:2px;}
+.mi-val{font-size:14px;color:var(--dark);font-weight:500;line-height:1.5;}
+
+/* ── CALCULADORA ── */
+.calc-section{background:var(--light);}
+.calc-wrapper{display:grid;gap:40px;margin-top:40px;}
+@media(min-width:700px){.calc-wrapper{grid-template-columns:1fr 1fr;align-items:start;}}
+.calc-form{background:var(--white);padding:32px;box-shadow:0 4px 24px rgba(0,0,0,.07);}
+.calc-field{margin-bottom:20px;}
+.calc-field label{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);font-weight:600;margin-bottom:8px;}
+.calc-field input,
+.calc-field select{width:100%;padding:12px 14px;border:1px solid #e0e0e0;font-family:var(--font-sans);font-size:14px;color:var(--dark);background:var(--white);outline:none;transition:border-color .2s;border-radius:2px;}
+.calc-field input:focus,
+.calc-field select:focus{border-color:var(--blue);}
+.calc-btn{width:100%;background:var(--black);color:var(--white);padding:14px;font-family:var(--font-sans);font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;}
+.calc-btn:hover{background:var(--blue);}
+.calc-result{background:var(--dark);padding:32px;color:var(--white);display:none;}
+.calc-result.show{display:block;}
+.cr-title{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;font-weight:600;}
+.cr-item{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.07);}
+.cr-item:last-child{border-bottom:none;margin-bottom:0;}
+.cr-label{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.cr-val{font-family:var(--font-serif);font-size:28px;font-weight:700;color:var(--white);}
+.cr-val span{font-size:14px;color:rgba(255,255,255,.5);font-family:var(--font-sans);font-weight:400;}
+.cr-note{font-size:10px;color:rgba(255,255,255,.28);margin-top:12px;line-height:1.6;}
+.calc-info{padding:28px 0;}
+.ci-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;font-size:13px;color:#555;line-height:1.5;}
+.ci-dot{width:8px;height:8px;background:var(--blue);border-radius:50%;margin-top:5px;flex-shrink:0;}
+
+/* ── CONTACTO ── */
+.contacto-section{background:var(--dark);}
+.contacto-section .section-label{color:var(--gold);}
+.contacto-section .section-title{color:var(--white);}
+.contacto-grid{display:grid;gap:40px;margin-top:40px;}
+@media(min-width:700px){.contacto-grid{grid-template-columns:1fr 1fr;}}
+.contact-form{display:flex;flex-direction:column;gap:14px;}
+.cf-field input,
+.cf-field textarea,
+.cf-field select{width:100%;padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--white);font-family:var(--font-sans);font-size:14px;outline:none;border-radius:2px;transition:border-color .2s;}
+.cf-field input::placeholder,
+.cf-field textarea::placeholder{color:rgba(255,255,255,.3);}
+.cf-field input:focus,
+.cf-field textarea:focus,
+.cf-field select:focus{border-color:var(--blue);}
+.cf-field textarea{height:120px;resize:vertical;}
+.cf-field select option{background:var(--dark);color:var(--white);}
+.cf-submit{background:var(--blue);color:var(--white);padding:14px;border:none;font-family:var(--font-sans);font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;border-radius:2px;}
+.cf-submit:hover{background:#1565a0;}
+.contact-info{display:flex;flex-direction:column;gap:24px;}
+.ci-block .cib-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:6px;}
+.ci-block .cib-val{color:var(--white);font-size:15px;font-weight:500;line-height:1.6;}
+.wa-big{display:flex;align-items:center;gap:12px;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.25);padding:16px 20px;border-radius:4px;margin-top:8px;cursor:pointer;transition:background .2s;}
+.wa-big:hover{background:rgba(37,211,102,.2);}
+.wa-big .wa-icon{font-size:28px;}
+.wa-big .wa-text .wt-top{color:rgba(255,255,255,.5);font-size:10px;letter-spacing:2px;text-transform:uppercase;}
+.wa-big .wa-text .wt-num{color:var(--white);font-size:18px;font-weight:700;margin-top:2px;}
 
 /* ── FOOTER ── */
-footer{background:var(--black);color:rgba(255,255,255,0.4);padding:4rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255,0.05);font-size:0.9rem;font-weight:300;}
+.footer{background:rgba(0,0,0,.95);border-top:1px solid rgba(255,255,255,.06);padding:clamp(30px,5vw,50px) clamp(16px,6vw,80px);}
+.footer-grid{display:grid;gap:30px;margin-bottom:30px;}
+@media(min-width:600px){.footer-grid{grid-template-columns:2fr 1fr 1fr;}}
+.footer-logo .fl-name{font-family:var(--font-serif);color:var(--white);font-size:22px;font-weight:900;}
+.footer-logo .fl-name span{color:var(--gold);}
+.footer-logo .fl-sub{color:rgba(255,255,255,.28);font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-top:4px;}
+.footer-logo .fl-desc{color:rgba(255,255,255,.38);font-size:12px;line-height:1.7;margin-top:12px;max-width:260px;}
+.footer-col h4{color:var(--white);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:14px;}
+.footer-col a{display:block;color:rgba(255,255,255,.38);font-size:13px;margin-bottom:8px;transition:color .2s;}
+.footer-col a:hover{color:var(--white);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.fb-copy{color:rgba(255,255,255,.25);font-size:11px;}
+.fb-brand{color:rgba(255,255,255,.25);font-size:11px;letter-spacing:1px;}
 
-/* ── WHATSAPP BOTÓN FLOTANTE ── */
-.whatsapp-float {
-  position:fixed;bottom:30px;right:30px;background:#25d366;color:white;
-  width:60px;height:60px;border-radius:50%;text-align:center;font-size:30px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.3);z-index:999;display:flex;align-items:center;
-  justify-content:center;transition:all 0.3s ease;
+/* ── WHATSAPP FAB ── */
+.wa-fab{
+  position:fixed;bottom:24px;right:24px;z-index:999;
+  width:56px;height:56px;background:#25d366;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;box-shadow:0 4px 20px rgba(37,211,102,.4);
+  transition:transform .25s,box-shadow .25s;
+  animation:wapulse 3s ease-in-out infinite;
 }
-.whatsapp-float:hover {transform:scale(1.1);background:#20ba5a;}
+.wa-fab:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(37,211,102,.55);}
+@keyframes wapulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4);}50%{box-shadow:0 4px 32px rgba(37,211,102,.65);}}
 
-/* ── ANIMATIONS ── */
-@keyframes fadeInUp{to{opacity:1;transform:translateY(0);}}
+/* ── ANIMATE ON SCROLL ── */
+.animate{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease;}
+.js-ready .animate{opacity:0;transform:translateY(28px);}
+.js-ready .animate.visible{opacity:1;transform:none;}
+.animate-delay-1{transition-delay:.1s;}
+.animate-delay-2{transition-delay:.2s;}
+.animate-delay-3{transition-delay:.3s;}
 
-/* ── RESPONSIVE ── */
-@media(max-width:1024px){
-  .desc-grid, .calc-grid, .contact-grid{grid-template-columns:1fr;gap:4rem;}
-  .hero-title{font-size:3rem;}
-  .nav-menu{display:none;}
-  .nav-toggle{display:block;}
-}
-@media(max-width:768px){
-  section{padding:5rem 1.5rem;}
-  .hero{padding:0 5%;}
-  .hero-title{font-size:2.5rem;}
-  .c-form{grid-template-columns:1fr;}
-  .cf-field.full{grid-column:span 1;}
-  .calc-form, .calc-result{padding:2rem;}
+@media(max-width:600px){
+  .hero-ctas{flex-direction:column;align-items:center;}
+  .btn-primary,.btn-outline{width:100%;text-align:center;}
 }
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-container">
-    <a href="#" class="nav-logo">NuestroHogar<span>Vive Alto Génova</span></a>
-    <ul class="nav-menu">
-      <li><a href="#" class="nav-link active">Inicio</a></li>
-      <li><a href="#detalles" class="nav-link">Desarrollo</a></li>
-      <li><a href="#amenidades" class="nav-link">Amenidades</a></li>
-      <li><a href="#modelos" class="nav-link">Modelos</a></li>
-      <li><a href="#simulador" class="nav-link">Cotizador</a></li>
-    </ul>
-    <a href="#contacto" class="nav-btn">Agendar Cita</a>
-    <div class="nav-toggle"><i class="fa-solid fa-bars"></i></div>
+<!-- NAVBAR -->
+<nav class="nav" id="navbar">
+  <div class="nav-logo">
+    <div class="nl">Vive Alto <span>Génova</span></div>
+    <div class="ns">NuestroHogar</div>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="#modelos">Modelos</a>
+    <a href="#galeria">Galería</a>
+    <a href="#amenidades">Amenidades</a>
+    <a href="#mapa">Ubicación</a>
+    <a href="#calculadora">Calculadora</a>
+    <a href="#contacto" class="nav-wa">📱 Contáctanos</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
   </div>
 </nav>
 
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <span class="hero-tag">Preventa Exclusiva</span>
-    <h1 class="hero-title">El espacio ideal para comenzar tu historia</h1>
-    <p class="hero-p">Descubre un concepto residencial diseñado para superar tus expectativas. Ubicación privilegiada, amenidades premium y la plusvalía que tu patrimonio merece.</p>
-    <div class="btn-group">
-      <a href="#contacto" class="btn-p">Quiero Información</a>
-      <a href="#simulador" class="btn-s">Calcular Crédito</a>
-    </div>
-  </div>
-</section>
-
-<section id="detalles">
-  <div class="container desc-grid">
-    <div class="desc-text sec-header">
-      <span class="sec-tag">El Desarrollo</span>
-      <h2 class="sec-title">Un santuario de tranquilidad y modernidad</h2>
-      <br>
-      <p><strong>Vive Alto Génova</strong> es la fusión perfecta entre diseño arquitectónico contemporáneo y funcionalidad. Pensado para familias que buscan elevar su calidad de vida, ofrece un entorno seguro, armónico y conectado con las principales vías de la ciudad.</p>
-      <p>Cada rincón ha sido planificado meticulosamente para aprovechar la luz natural, ofreciendo amplios espacios interiores que brindan el confort y la privacidad que tú y los tuyos necesitan.</p>
-    </div>
-    <div class="desc-img">
-      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" alt="Residencial">
-    </div>
-  </div>
-</section>
-
-<section id="amenidades" class="amenities">
-  <div class="container">
-    <div class="sec-header">
-      <span class="sec-tag">Lifestyle</span>
-      <h2 class="sec-title">Amenidades que transforman tus días</h2>
-    </div>
-    <div class="amenities-grid">
-      <div class="amenity-card">
-        <span class="am-num">01 /</span>
-        <i class="fa-solid fa-shield-halved"></i>
-        <h3>Seguridad 24/7</h3>
-        <p>Acceso controlado automatizado y personal de vigilancia para tu total tranquilidad.</p>
-      </div>
-      <div class="amenity-card">
-        <span class="am-num">02 /</span>
-        <i class="fa-solid fa-tree"></i>
-        <h3>Áreas Verdes</h3>
-        <p>Espacios arbolados, parques infantiles y senderos diseñados para conectar con la naturaleza.</p>
-      </div>
-      <div class="amenity-card">
-        <span class="am-num">03 /</span>
-        <i class="fa-solid fa-dumbbell"></i>
-        <h3>Gimnasio</h3>
-        <p>Equipamiento moderno para tus rutinas diarias sin necesidad de salir de tu hogar.</p>
-      </div>
-      <div class="amenity-card">
-        <span class="am-num">04 /</span>
-        <i class="fa-solid fa-mug-hot"></i>
-        <h3>Club House</h3>
-        <p>Un salón de eventos exclusivo para celebraciones familiares y reuniones sociales.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="modelos">
-  <div class="container">
-    <div class="sec-header">
-      <span class="sec-tag">Residencias</span>
-      <h2 class="sec-title">Encuentra tu prototipo ideal</h2>
-    </div>
-    <div class="models-grid">
-      <div class="model-card">
-        <div class="model-img">
-          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80" alt="Modelo Verona">
-        </div>
-        <div class="model-info">
-          <h3>Prototipo Verona</h3>
-          <span class="price">Desde $1,850,000 MXN</span>
-          <div class="model-specs">
-            <div class="spec-item"><i class="fa-solid fa-bed"></i><span>3 Rec.</span></div>
-            <div class="spec-item"><i class="fa-solid fa-bath"></i><span>2.5 Baños</span></div>
-            <div class="spec-item"><i class="fa-solid fa-car"></i><span>2 Estac.</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="model-card">
-        <div class="model-img">
-          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80" alt="Modelo Florencia">
-        </div>
-        <div class="model-info">
-          <h3>Prototipo Florencia</h3>
-          <span class="price">Desde $2,240,000 MXN</span>
-          <div class="model-specs">
-            <div class="spec-item"><i class="fa-solid fa-bed"></i><span>4 Rec.</span></div>
-            <div class="spec-item"><i class="fa-solid fa-bath"></i><span>3 Baños</span></div>
-            <div class="spec-item"><i class="fa-solid fa-car"></i><span>2 Estac.</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="simulador" class="calc-sec">
-  <div class="container calc-grid">
-    <div class="calc-form">
-      <span class="sec-tag">Financiamiento</span>
-      <h2 class="sec-title">Simulador de Crédito</h2>
-      <br><br>
-      <div class="input-field">
-        <label>Tipo de Crédito</label>
-        <select id="tipoCredito">
-          <option value="infonavit">Infonavit Tradicional</option>
-          <option value="bancario">Crédito Bancario Hipotecario</option>
-          <option value="cofinavit">Cofinavit</option>
-        </select>
-      </div>
-      <div class="input-field">
-        <label>Precio de la Vivienda (MXN)</label>
-        <input type="number" id="valPropiedad" value="1850000">
-      </div>
-      <div class="input-field">
-        <label>Plazo del Crédito</label>
-        <select id="plazo">
-          <option value="20">20 Años</option>
-          <option value="15">15 Años</option>
-          <option value="30">30 Años</option>
-        </select>
-      </div>
-      <button class="calc-btn" onclick="calcularHipoteca()">Calcular mensualidad estimada</button>
-    </div>
-    
-    <div class="calc-result" id="calcResult">
-      <span class="res-title">Tu Presupuesto Estimado</span>
-      <div class="res-amount" id="crCredito">$ 0,000,000</div>
-      <div class="res-pago" id="crPago">$ 0,000 <span>/ mes</span></div>
-      <div class="res-data"><span>Tasa de interés Anual</span><span id="crTasa">10.45 %</span></div>
-      <div class="res-data"><span>Equivalente aproximado</span><span id="crVSM">0.00 VSM</span></div>
-      <p class="res-note" id="crNote">Ingresa los datos del formulario y presiona calcular para ver la estimación de tu crédito hipotecario.</p>
-    </div>
-  </div>
-</section>
-
-<section id="contacto">
-  <div class="container contact-grid">
-    <div class="info-box">
-      <span class="sec-tag">Contacto</span>
-      <h2 class="sec-title">¿Listo para conocer tu próximo hogar?</h2>
-      <p>Agenda una visita guiada para conocer nuestras casas muestra y recibir una asesoría financiera personalizada sin costo alguno.</p>
-      <div class="info-item">
-        <i class="fa-solid fa-location-dot"></i>
-        <div>
-          <h4>Ubicación</h4>
-          <p>Av. Génova Residencial #405, Sector Premium</p>
-        </div>
-      </div>
-      <div class="info-item">
-        <i class="fa-solid fa-phone"></i>
-        <div>
-          <h4>Teléfono de Ventas</h4>
-          <p>+52 220 618 3849</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="contact-form">
-      <div class="c-form">
-        <div class="cf-field">
-          <label>Nombre Completo</label>
-          <input type="text" placeholder="Ej. Juan Pérez">
-        </div>
-        <div class="cf-field">
-          <label>Teléfono</label>
-          <input type="tel" placeholder="10 dígitos">
-        </div>
-        <div class="cf-field full">
-          <label>Prototipo de Interés</label>
-          <select>
-            <option>Modelo Verona</option>
-            <option>Modelo Florencia</option>
-            <option>Solo asesoría de crédito</option>
-          </select>
-        </div>
-        <div class="cf-field full">
-          <label>Mensaje adicional</label>
-          <textarea rows="4" placeholder="¿Tienes alguna duda en específico?"></textarea>
-        </div>
-        <button class="cf-btn" onclick="enviarWA()">Enviar Mensaje por 
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg">
+    <img class="hero-img" id="heroBg" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBUODAsLDBkSEw8VHhsgHx4bHR0hJTApISMtJB0dKjkqLTEzNjY2ICg7Pzo0PjA1NjP/2wBDAQkJCQwLDBgODhgzIh0iMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzP/wAARCAKjA4QDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCxjnn9KXGPw7UnUUoOc5rI1FJz1FJ2o/Gjq3XigAHOaUY6GgdKKAA8EGl69M0n1oHagAGM0Hpg/WkPXFL/ACoABzR3pByM0vFAAfqPcUDuKM/N680c+vSgA60emaD0FA6n2oAM0h5HvRnNGefegA7il9aaD1pelABxRmjPOabQAoo70cUE0AFJmjNJ2oADRQaTNAC0mc0ntRQA6kP0pM0maEA40hpCeOtITQA40hNNLYpCaEAuaQ0wmk3UwHZpM+tNJo/GgBaTNGaQnigA70ZpPekouA7NJSUZouAUUUd6AFzSZo60CgAooJooASigmjNABmjFJmkzQAUUhYKMnAHvUL3SDhQW/lQBN1pGIQZYgfWqj3MjDAOB7VEck5JOfrQBZe5VRhVJ9z0qB5pHGC2AewpmKMGgBM0ZNLiloAbilpQKMUAJSilxS0wExRinYoxQITbQBT6TFACcZpcClpQKAExRTqKAEGKKdRigApQOaKWgAHWlxQBzS0AJS0UtAAKUDmilA5oATHNOFLilxQAgp2KSlz3oAMUtGaSgBw4FG8U3PFGfegB+72pM+9NzSFgByaVxjsilzUe8HpShZHI2KWz6UXAdkUZz0qVLOVvvbU+pqUWaqAWJJ/Ki4FXNADMflUmr4giUjCDnuakI/ClcCiLWVjzgfU1ItmP4nz9Ktd84o6ClcCEW8S9Ix+JzTsY6AU+mnrQAZ5Ao2jpTsccUdsUgFUCjApccACigBh560P16gUp5
